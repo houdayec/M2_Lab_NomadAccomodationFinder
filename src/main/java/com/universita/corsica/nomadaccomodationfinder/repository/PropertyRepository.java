@@ -1,6 +1,8 @@
 package com.universita.corsica.nomadaccomodationfinder.repository;
 
 
+import com.universita.corsica.nomadaccomodationfinder.enums.TypeProperty;
+import com.universita.corsica.nomadaccomodationfinder.model.Comment;
 import com.universita.corsica.nomadaccomodationfinder.model.Property;
 import com.universita.corsica.nomadaccomodationfinder.model.User;
 import org.springframework.stereotype.Repository;
@@ -10,13 +12,7 @@ import java.util.*;
 @Repository
 public class PropertyRepository implements CRUD<String, Property> {
 
-    public static final PropertyRepository Instance = new PropertyRepository();
-
-    public static PropertyRepository getInstance(){
-        return Instance;
-    }
-
-    private Map<String, Property> database = new HashMap<String, Property>();
+    private static Map<String, Property> database = new HashMap<String, Property>();
 
     public List<Property> getAll() {
         return new ArrayList<Property>(database.values());
@@ -30,12 +26,16 @@ public class PropertyRepository implements CRUD<String, Property> {
         return database.put(entity.getId(), entity);
     }
 
-    @Override
-    public Property deleteById(String entity) {
-        return database.remove(entity);
+    public boolean saveOrUpdateList(List<Property> entities) {
+        for(Property p : entities){
+            database.put(p.getId(), p);
+        }
+        return true;
     }
 
-    public Property deleteById(Property entity) {
+
+    @Override
+    public Property deleteById(String entity) {
         return database.remove(entity);
     }
 
@@ -53,11 +53,41 @@ public class PropertyRepository implements CRUD<String, Property> {
     }
 
     public List<Property> findByKeywords(Collection<String> keywords){
-        return null;
+        List<Property> listProperties = new ArrayList<>();
+
+        for(Property p : database.values()){
+            for (String keyword : keywords){
+                if(p.keywords.contains(keyword)){
+                    listProperties.add(p);
+                }
+            }
+        }
+
+        return listProperties;
     }
 
     public List<Property> findByScoreAbove(int note){
-        return null;
+        List<Property> listProperties = new ArrayList<>();
+
+        for(Property p : database.values()){
+            double average = p.getComments().stream().mapToDouble(Comment::getNote).average().getAsDouble();
+            if(average >= note){
+                listProperties.add(p);
+            }
+        }
+
+        return listProperties;
+    }
+
+    public List<Property> findByType(TypeProperty type){
+        List<Property> listProperties = new ArrayList<>();
+
+        for(Property p : database.values()){
+            if(p.getType() == type)
+                listProperties.add(p);
+        }
+
+        return listProperties;
     }
 
 }

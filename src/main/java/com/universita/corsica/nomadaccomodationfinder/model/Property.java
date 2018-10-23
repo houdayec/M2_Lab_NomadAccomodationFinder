@@ -127,10 +127,8 @@ public class Property {
     }
 
     /**
-     * DEFAULT CONSTRUCTOR
+     * FLUENT API
      */
-
-
     public Property withPrice(float price) {
         this.setPrice(price);
         return this;
@@ -138,6 +136,16 @@ public class Property {
 
     public Property withId(String id){
         this.setId(id);
+        return this;
+    }
+
+    public Property withType(TypeProperty type){
+        this.setType(type);
+        return this;
+    }
+
+    public Property withKeywords(List<String> keywords){
+        this.setKeywords(keywords);
         return this;
     }
 
