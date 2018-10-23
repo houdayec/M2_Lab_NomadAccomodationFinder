@@ -1,7 +1,8 @@
-package com.universita.corsica.nomadaccomodationfinder.service;
+package com.universita.corsica.nomadaccomodationfinder.controller;
 
 import com.universita.corsica.nomadaccomodationfinder.enums.TypeProperty;
 import com.universita.corsica.nomadaccomodationfinder.model.Property;
+import com.universita.corsica.nomadaccomodationfinder.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

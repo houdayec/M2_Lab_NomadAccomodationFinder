@@ -2,6 +2,7 @@ package com.universita.corsica.nomadaccomodationfinder.service;
 
 
 import com.universita.corsica.nomadaccomodationfinder.enums.TypeProperty;
+import com.universita.corsica.nomadaccomodationfinder.model.Comment;
 import com.universita.corsica.nomadaccomodationfinder.model.Property;
 import com.universita.corsica.nomadaccomodationfinder.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,19 +46,23 @@ public class PropertyService {
             prop.setKeywords(listKeywords);
         }
 
+        List<Comment> listComments = new ArrayList<>();
+        listComments.add(new Comment("1", 5, "Super"));
+        listComments.add(new Comment("2", 4, "Great"));
+        listComments.add(new Comment("3", 3, "It's ok"));
+
+        p2.setComments(listComments);
+
         propertyRepository.saveOrUpdateList(listProperties);
     }
 
-    /**
-     *
-     * findByDescription(String description);
-     * Haversine formula -> get distance with coordinates
-     * findInRadius(double latitude, double longitude, double radiusKm);
-     * findByTags(Collections<String>tags);
-     * fincByScoreAbove(double score);
-     *
-     *
-     */
+    public List<Property> findAll(){
+        return propertyRepository.getAll();
+    }
+
+    public Property findById(String id){
+        return propertyRepository.getById(id);
+    }
 
     public Property findByDescription(String description){
         return propertyRepository.findByDescription(description);
@@ -75,4 +80,11 @@ public class PropertyService {
         return propertyRepository.findByType(typeProperty);
     }
 
+    public void deleteById(String id){
+        propertyRepository.deleteById(id);
+    }
+
+    public Property insertProperty(Property p){
+        return propertyRepository.saveOrUpdate(p);
+    }
 }
