@@ -6,8 +6,10 @@ import com.universita.corsica.nomadaccomodationfinder.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 @Controller()
@@ -46,6 +48,7 @@ public class PropertyController {
     }
 
     @PostMapping()
+    @Validated
     public ResponseEntity<String> addAccomodation(@RequestBody Property property){
         propertyService.insertProperty(property);
         return ResponseEntity.ok("Accomodation " + property + " inserted");
@@ -55,6 +58,12 @@ public class PropertyController {
     public ResponseEntity<String> deleteAccomodationById(@PathVariable("id") String searchedId) {
         propertyService.deleteById(searchedId);
         return ResponseEntity.ok("Accomodation " + searchedId + " deleted");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateAccomodation(@RequestBody @Valid Property property){
+        propertyService.updateProperty(property);
+        return ResponseEntity.ok("Accomodation " + property.toString() + " updated in database");
     }
 
 }

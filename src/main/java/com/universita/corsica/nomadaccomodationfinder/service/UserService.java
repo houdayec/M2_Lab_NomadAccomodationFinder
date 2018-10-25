@@ -40,9 +40,16 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public boolean addUser(User user){
-        userRepository.saveOrUpdate(user);
-        return true;
+    public User addUser(User user){
+        return userRepository.saveOrUpdate(user);
+    }
+
+    public User removeUser(String id){
+        return userRepository.deleteById(id);
+    }
+
+    public User updateUser(User user){
+        return userRepository.saveOrUpdate(user);
     }
 
 }

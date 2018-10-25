@@ -87,4 +87,8 @@ public class PropertyService {
     public Property insertProperty(Property p){
         return propertyRepository.saveOrUpdate(p);
     }
+
+    public Property updateProperty(Property p){
+        return propertyRepository.saveOrUpdate(p);
+    }
 }
