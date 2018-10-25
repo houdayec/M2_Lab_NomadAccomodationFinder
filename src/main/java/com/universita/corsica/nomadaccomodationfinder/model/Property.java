@@ -3,6 +3,7 @@ package com.universita.corsica.nomadaccomodationfinder.model;
 import com.universita.corsica.nomadaccomodationfinder.enums.Amenity;
 import com.universita.corsica.nomadaccomodationfinder.enums.TypeProperty;
 
+import javax.validation.constraints.NotNull;
 import java.net.URL;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class Property {
     /**
      * INTERN STATE
      */
+    @NotNull
     public String id;
     public TypeProperty type;
     public float surface;

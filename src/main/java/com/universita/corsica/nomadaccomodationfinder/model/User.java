@@ -1,5 +1,7 @@
 package com.universita.corsica.nomadaccomodationfinder.model;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Class that describes a user
  */
@@ -8,9 +10,13 @@ public class User {
     /**
      * INTERN STATE
      */
+    @NotNull
     private String id;
+    @NotNull
     private String lastName;
+    @NotNull
     private String firstName;
+    @NotNull
     private String email;
     private int phoneNumber;
     private String urlPhoto;
