@@ -57,11 +57,11 @@ public class PropertyService {
     }
 
     public List<Property> findAll(){
-        return propertyRepository.getAll();
+        return propertyRepository.findAll();
     }
 
     public Property findById(String id){
-        return propertyRepository.getById(id);
+        return propertyRepository.findById(id);
     }
 
     public Property findByDescription(String description){

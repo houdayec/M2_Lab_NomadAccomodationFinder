@@ -82,9 +82,21 @@ public class User {
     }
 
 
-    // Example fluent API
+    /**
+     * FLUENT API
+     */
     public User withId(String id){
         setId(id);
+        return this;
+    }
+
+    public User withFirstname(String firstname){
+        setFirstName(firstname);
+        return this;
+    }
+
+    public User withEmail(String email){
+        setEmail(email);
         return this;
     }
 

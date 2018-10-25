@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface CRUD<K,V> {
 
-    List<V> getAll();
+    List<V> findAll();
 
-    V getById(K id);
+    V findById(K id);
 
     V saveOrUpdate(V entity);
 

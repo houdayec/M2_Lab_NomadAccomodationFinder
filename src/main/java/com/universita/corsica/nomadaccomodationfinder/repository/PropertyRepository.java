@@ -14,14 +14,17 @@ public class PropertyRepository implements CRUD<String, Property> {
 
     private static Map<String, Property> database = new HashMap<String, Property>();
 
-    public List<Property> getAll() {
+    @Override
+    public List<Property> findAll() {
         return new ArrayList<Property>(database.values());
     }
 
-    public Property getById(String id) {
+    @Override
+    public Property findById(String id) {
         return database.get(id);
     }
 
+    @Override
     public Property saveOrUpdate(Property entity) {
         return database.put(entity.getId(), entity);
     }
@@ -32,7 +35,6 @@ public class PropertyRepository implements CRUD<String, Property> {
         }
         return true;
     }
-
 
     @Override
     public Property deleteById(String entity) {
