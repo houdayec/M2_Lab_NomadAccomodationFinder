@@ -9,8 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@RestController
+@RestController()
 @RequestMapping("/users")
 @Validated
 public class UserController {
@@ -19,40 +20,29 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<String> getAllUsers(){
-        StringBuilder responseBody = new StringBuilder();
-        for(User u : userService.findAll()){
-            responseBody.append(u.toString());
-            responseBody.append("</br></br>");
-        }
-        return ResponseEntity.ok(responseBody.toString());
+    public ResponseEntity<List<User>> getAllUsers(){
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> getUserById(@PathVariable("id") String id){
-        StringBuilder responseBody = new StringBuilder();
-        User u = userService.findById(id);
-        responseBody.append(u.toString());
-        return ResponseEntity.ok(responseBody.toString());
+    public ResponseEntity<User> getUserById(@PathVariable("id") String id){
+        return ResponseEntity.ok(userService.findById(id));
     }
 
     @PostMapping
     @Validated
-    public ResponseEntity<String> addUser(@RequestBody @Valid User user){
-        userService.addUser(user);
-        return ResponseEntity.ok("User " + user.toString() + " inserted");
+    public ResponseEntity<User> addUser(@RequestBody @Valid User user){
+        return ResponseEntity.ok(userService.addUser(user));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable("id") String id){
-        userService.removeUser(id);
-        return ResponseEntity.ok("User " + id + " removed from database successfully");
+    public ResponseEntity<User> deleteUser(@PathVariable("id") String id){
+        return ResponseEntity.ok(userService.removeUser(id));
     }
 
     @PutMapping
-    public ResponseEntity<String> updateUser(@RequestBody @Valid User user){
-        userService.updateUser(user);
-        return ResponseEntity.ok("User " + user.toString() + " updated in database");
+    public ResponseEntity<User> updateUser(@RequestBody @Valid User user){
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 
 }

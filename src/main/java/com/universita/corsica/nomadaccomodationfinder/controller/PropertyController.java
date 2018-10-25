@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
-@Controller()
+@RestController()
 @RequestMapping("/accomodations")
 public class PropertyController {
 

@@ -2,6 +2,7 @@ package com.universita.corsica.nomadaccomodationfinder.repository;
 
 import com.universita.corsica.nomadaccomodationfinder.model.Property;
 import com.universita.corsica.nomadaccomodationfinder.model.User;
+import org.springframework.data.elasticsearch.repository.ElasticsearchCrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,10 +10,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
-public class UserRepository implements CRUD<String, User> {
+public interface UserRepository extends ElasticsearchCrudRepository<User, String> {
 
-    private Map<String, User> database = new HashMap<String, User>();
+    List<User> findByLastName(String lastName);
+
+    List<User> findByFirstName(String firstName);
+
+    List<User> findByEmail(String email);
+
+    User deleteUserById(String id);
+
+
+    /*private Map<String, User> database = new HashMap<String, User>();
 
     @Override
     public List<User> findAll() {
@@ -57,6 +66,6 @@ public class UserRepository implements CRUD<String, User> {
             }
         }
         return null;
-    }
+    }*/
 
 }

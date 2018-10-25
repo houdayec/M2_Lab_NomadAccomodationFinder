@@ -1,16 +1,21 @@
 package com.universita.corsica.nomadaccomodationfinder.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import javax.validation.constraints.NotNull;
 
 /**
  * Class that describes a user
  */
+@Document(indexName = "users", type="user")
 public class User {
 
     /**
      * INTERN STATE
      */
     @NotNull
+    @Id
     private String id;
     @NotNull
     private String lastName;
